@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Log;
+import android.widget.Button;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,8 +24,15 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
     private String iperfPath;
     private String iperfBinaryName;
     private Context context;
+    private Button buttonRun;
     private AssetManager manager;
     private String iperfAbsolutePath;
+
+    public InitialConfigurator(Context context, Button buttonRun){
+        this.context = context;
+        this.buttonRun = buttonRun;
+
+    }
 
     public boolean existsIperfBinary() {
         Log.d(TAG, "Checking binary in path: " + this.iperfAbsolutePath);
@@ -59,8 +67,7 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
 
     }
 
-    public void init(Context context) throws ErrnoException {
-        this.context = context;
+    public void init() throws ErrnoException {
         this.manager = context.getAssets();
         this.iperfPath = context.getApplicationContext().getFilesDir().getAbsolutePath();
         Os.setenv("TEMP", this.iperfPath, true);
@@ -95,8 +102,9 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
 
             Context context = (Context) objects[0];
 
-            init(context);
+            init();
             makeIperfBinary();
+
 
         } catch (ErrnoException | IOException e) {
             Log.e(TAG, "EXCEPTION", e);
@@ -109,6 +117,13 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
+
+    }
+
+    @Override
+    protected void onPostExecute(Boolean result) {
+
+        this.buttonRun.setEnabled(true);
 
     }
 }

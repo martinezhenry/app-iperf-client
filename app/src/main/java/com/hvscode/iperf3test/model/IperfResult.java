@@ -1,5 +1,6 @@
 package com.hvscode.iperf3test.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -24,5 +25,10 @@ public class IperfResult {
     @SerializedName("title")
     @Expose
     private String title;
+
+    @Override
+    public String toString(){
+        return new Gson().toJson(this);
+    }
 
 }
