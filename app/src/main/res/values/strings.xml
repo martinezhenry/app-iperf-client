@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Iperf3Test</string>
+    <string name="asset_exec_name">iperf3</string>
+    <string name="exec_target_path">iperf3</string>
+    <string name="command_exec_permissions_prefix">chmod u+x </string>
+    <string name="service_config_name">ConfigService</string>
+</resources>
