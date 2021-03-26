@@ -3,7 +3,10 @@ package com.hvscode.iperf3test;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-
             init();
             initialConfigurator.execute(this);
 
@@ -38,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void init() throws IOException {
-        Button buttonRun = (Button) findViewById(R.id.btnRun);
-        TextView resultView = (TextView) findViewById(R.id.txtResult);
+        validation();
+        Button buttonRun = findViewById(R.id.btnRun);
+        TextView resultView = findViewById(R.id.txtResult);
         testRunner = new TestRunner(buttonRun, resultView);
         initialConfigurator = new InitialConfigurator(this, buttonRun);
         this.iperfPath = this.getApplicationContext().getFilesDir().getAbsolutePath();
@@ -52,11 +55,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void runTest(View view){
+    public void validation(){
+
+        EditText txtHost = findViewById(R.id.txtHost);
+
+        txtHost.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                if (txtHost.getText().length() == 0) {
+                    txtHost.setError( "Host is required!" );
+                }
+            }
+        });
+
+
+    }
+
+
+    public void runTest(View view) throws IOException {
         Log.d(TAG, "onClick");
-        testRunner.execute(iperfPath, outputPath);
+        hideKeyBoard(view);
+        TextView resultView = findViewById(R.id.txtResult);
+        EditText hostText =  findViewById(R.id.txtHost);
+        EditText bufferText =  findViewById(R.id.txtBuffer);
+        EditText bitRateText =  findViewById(R.id.txtBitRate);
+        EditText titleText =  findViewById(R.id.txtTitle);
+        EditText timeText =  findViewById(R.id.txtTime);
+        CheckBox udpCheckbox = findViewById(R.id.checkUDP);
 
+        String host = hostText.getText().toString();
+        String buffer = bufferText.getText().toString();
+        String bitRate = bitRateText.getText().toString();
+        String title = titleText.getText().toString();
+        String time = timeText.getText().toString();
+        String udp = Boolean.toString(udpCheckbox.isChecked());
 
+        testRunner = new TestRunner((Button) view, resultView);
+        testRunner.execute(iperfPath, outputPath, host, buffer, time, bitRate, title, udp);
+
+    }
+
+    private void hideKeyBoard(View v) {
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
 
 }

@@ -4,4 +4,9 @@
     <string name="exec_target_path">iperf3</string>
     <string name="command_exec_permissions_prefix">chmod u+x </string>
     <string name="service_config_name">ConfigService</string>
+    <string name="txtHost_hint">Host</string>
+    <string name="txtBuffer_hint">Buffer #[KMG]</string>
+    <string name="txtTime_hint">Time #</string>
+    <string name="txtTitle_hint">Title</string>
+    <string name="txtBitRate_hint">Bitrate #[KMG][/#]</string>
 </resources>

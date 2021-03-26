@@ -27,7 +27,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Host"
+        android:hint="@string/txtHost_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -37,12 +37,13 @@
 
     <EditText
         android:id="@+id/txtTitle"
+
         android:layout_width="350dp"
         android:layout_height="45dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Title"
+        android:hint="@string/txtTitle_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.200"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -71,7 +72,7 @@
         android:layout_marginBottom="4dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Buffer #[KMG]"
+        android:hint="@string/txtBuffer_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -80,7 +81,7 @@
         app:layout_constraintVertical_bias="0.210" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkUDP"
         android:layout_width="350dp"
         android:layout_height="45dp"
         android:text="use UDP rather than TCP?"
@@ -98,6 +99,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="number"
+        android:hint="@string/txtTime_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -112,7 +114,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Bitrate #[KMG][/#]"
+        android:hint="@string/txtBitRate_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintLeft_toLeftOf="parent"
