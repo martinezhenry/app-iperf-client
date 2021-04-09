@@ -23,6 +23,7 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
 
     private String iperfPath;
     private String iperfBinaryName;
+    private String iperfAssetName;
     private Context context;
     private Button buttonRun;
     private AssetManager manager;
@@ -44,7 +45,7 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
     public void makeIperfBinary() throws IOException {
 
         if (!existsIperfBinary()) {
-            InputStream inputStream = manager.open(this.iperfBinaryName);
+            InputStream inputStream = manager.open(this.iperfAssetName);
 
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
@@ -71,7 +72,8 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
         this.manager = context.getAssets();
         this.iperfPath = context.getApplicationContext().getFilesDir().getAbsolutePath();
         Os.setenv("TEMP", this.iperfPath, true);
-        this.iperfBinaryName = context.getResources().getString(R.string.asset_exec_name);
+        this.iperfAssetName = context.getResources().getString(R.string.asset_exec_name);
+        this.iperfBinaryName = context.getResources().getString(R.string.binary_name);
         this.iperfAbsolutePath = iperfPath.concat(File.separator).concat(this.iperfBinaryName);
 
     }

@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 public class TestRunner extends AsyncTask<String, Void, IperfResult> {
@@ -39,14 +40,22 @@ public class TestRunner extends AsyncTask<String, Void, IperfResult> {
     protected IperfResult doInBackground(String... params) {
 
         IperfResult iperfResult = null;
-        String result = null;
+        StringBuilder result = new StringBuilder();
         try {
 
             String command = buildCommand(params);
             ExecuteShell.execute(command);
 
-            result = new String(Files.readAllBytes(Paths.get(outputPath)));
-            iperfResult = new Gson().fromJson(result, IperfResult.class);
+            //result = new String(Files.readAllBytes(Paths.get(outputPath)));
+            List<String> lines = Files.readAllLines(Paths.get(outputPath));
+
+            lines.stream().filter(line -> !line.startsWith("iperf3: error")).forEach(line -> {
+                result.append(line);
+            });
+
+            Log.d(TAG, result.toString());
+
+            iperfResult = new Gson().fromJson(result.toString(), IperfResult.class);
             Files.deleteIfExists(Paths.get(outputPath));
 
         } catch (IOException e) {
