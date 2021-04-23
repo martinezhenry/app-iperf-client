@@ -3,6 +3,7 @@ package com.hvscode.iperf3test;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Log;
@@ -29,6 +30,8 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
     private AssetManager manager;
     private String iperfAbsolutePath;
 
+    private String ABI = Build.SUPPORTED_ABIS[0];
+
     public InitialConfigurator(Context context, Button buttonRun){
         this.context = context;
         this.buttonRun = buttonRun;
@@ -36,6 +39,7 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
     }
 
     public boolean existsIperfBinary() {
+        Log.d(TAG, "ABI detected: " + ABI);
         Log.d(TAG, "Checking binary in path: " + this.iperfAbsolutePath);
         return Files.exists(Paths.get(this.iperfAbsolutePath));
 
