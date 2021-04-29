@@ -16,9 +16,8 @@ public class IperfServiceImpl implements IperfService {
 
 
     @Override
-    public String buildCommand(Iperf iperf, HashMap<String, String> options) {
+    public String buildCommand(Iperf iperf) {
 
-        processOptions(options, iperf);
         StringBuilder builder = new StringBuilder();
 
         builder.append("iperf3");
@@ -29,22 +28,38 @@ public class IperfServiceImpl implements IperfService {
             IperfOption iperfOption = field.getAnnotation(IperfOption.class);
             Optional.ofNullable(iperfOption).ifPresent(option -> {
 
-                String name = getOptionName(field, iperfOption);
-                if (Optional.ofNullable(options.get(name)).isPresent()) {
-                    builder.append(option.command());
-                    builder.append(" ");
+                //String name = getOptionName(field, iperfOption);
+                //if (Optional.ofNullable(options.get(name)).isPresent()) {
+                String value = null;
+                try {
+                    if (!option.withValue()) {
 
-                    if (option.withValue()) {
-                        try {
-                            String value = (String) field.get(iperf);
-                            Optional.ofNullable(value).orElseThrow(()
-                                    -> new GeneralException(String.format("field %s is null but config with value %s", option.name(), option.withValue())));
-                            builder.append(value);
+                        boolean present = field.getBoolean(iperf);
+                        if (present) {
+
+                            builder.append(option.command());
                             builder.append(" ");
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
+
                         }
+
+
+                    } else {
+
+                        value = (String) field.get(iperf);
+                        Optional.ofNullable(value).ifPresent(val -> {
+                            if (val.trim().isEmpty())
+                                throw new GeneralException(String.format("field %s is empty, the value should be not empty", option.name(), option.withValue()));
+                            builder.append(option.command());
+                            builder.append(" ");
+                            builder.append(val);
+                            builder.append(" ");
+
+                        });
+
+
                     }
+                } catch (IllegalAccessException e) {
+                        e.printStackTrace();
                 }
 
             });

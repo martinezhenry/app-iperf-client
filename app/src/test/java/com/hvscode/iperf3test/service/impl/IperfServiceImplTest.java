@@ -20,12 +20,13 @@ public class IperfServiceImplTest {
         IperfService iperfService = new IperfServiceImpl();
         Iperf iperf = new Iperf();
 
-        HashMap<String, String> options = new HashMap<>();
+        iperf.setHost("127.0.0.1");
+        iperf.setPort("2021");
+        iperf.setInterval("10");
 
-        options.put("host", "127.0.0.1");
-        options.put("port", "2021");
+        iperf.setUdp(true);
 
-        String command = iperfService.buildCommand(iperf, options);
+        String command = iperfService.buildCommand(iperf);
 
         System.out.println(command);
 

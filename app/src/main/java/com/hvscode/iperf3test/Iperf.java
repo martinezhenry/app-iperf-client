@@ -26,28 +26,28 @@ public class Iperf {
     @IperfOption(name = "bind", command = "-B", withValue = true)
     private String bind;
     @IperfOption(name = "verbose", command = "-V", withValue = false)
-    private String verbose;
+    private boolean verbose;
     @IperfOption(name = "json", command = "-J", withValue = false)
-    private String json;
+    private boolean json;
     @IperfOption(name = "logfile", command = "--logfile", withValue = true)
     private String logfile;
     @IperfOption(name = "force-flush", command = "--forceflush", withValue = false)
-    private String forceFlush;
+    private boolean forceFlush;
     @IperfOption(name = "debug", command = "-d", withValue = false)
-    private String debug;
+    private boolean debug;
     @IperfOption(name = "version", command = "-v", withValue = false)
-    private String version;
+    private boolean version;
     @IperfOption(name = "help", command = "-p", withValue = false)
-    private String help;
+    private boolean help;
     // Server Specific
     @IperfOption(name = "server", command = "-s", withValue = false)
-    private String server;
+    private boolean server;
     @IperfOption(name = "daemon", command = "-D", withValue = false)
-    private String daemon;
+    private boolean daemon;
     @IperfOption(name = "pid-file", command = "-I", withValue = true)
     private String pidFile;
     @IperfOption(name = "one-off", command = "-1", withValue = false)
-    private String oneOff;
+    private boolean oneOff;
     @IperfOption(name = "rsa-private-key", command = "--rsa-private-key-path", withValue = true)
     private String rsaPrivateKeyPath;
     @IperfOption(name = "authorized-users", command = "--authorized-users-path", withValue = true)
@@ -56,13 +56,13 @@ public class Iperf {
     @IperfOption(name = "host", command = "-c", withValue = true)
     private String host;
     @IperfOption(name = "sctp", command = "--sctp", withValue = false)
-    private String sctp;
+    private boolean sctp;
     @IperfOption(name = "xbind", command = "-X", withValue = true)
     private String xbind;
     @IperfOption(name = "streams", command = "--nstreams", withValue = true)
     private String nStreams;
-    @IperfOption(name = "udp", command = "u", withValue = false)
-    private String udp;
+    @IperfOption(name = "udp", command = "-u", withValue = false)
+    private boolean udp;
     @IperfOption(name = "connect-timeout", command = "--connect-timeout", withValue = true)
     private String connectTimeout;
     @IperfOption(name = "bit-rate", command = "-b", withValue = true)
@@ -84,21 +84,21 @@ public class Iperf {
     @IperfOption(name = "parallel", command = "--parallel", withValue = true)
     private String parallel;
     @IperfOption(name = "reverse", command = "-R", withValue = false)
-    private String reverse;
+    private boolean reverse;
     @IperfOption(name = "bi.dir", command = "--bidir", withValue = false)
-    private String bDir;
+    private boolean bDir;
     @IperfOption(name = "window", command = "-w", withValue = true)
     private String window;
     @IperfOption(name = "congestion", command = "-C", withValue = false)
-    private String congestion;
+    private boolean congestion;
     @IperfOption(name = "set-mss", command = "--set-mss", withValue = true)
     private String setMss;
     @IperfOption(name = "no-deplay", command = "-N", withValue = false)
-    private String noDelay;
+    private boolean noDelay;
     @IperfOption(name = "version-4", command = "-4", withValue = false)
-    private String version4;
+    private boolean version4;
     @IperfOption(name = "version-6", command = "-6", withValue = false)
-    private String version6;
+    private boolean version6;
     @IperfOption(name = "tos", command = "-S", withValue = true)
     private String tos;
     @IperfOption(name = "dscp", command = "-dscp", withValue = true)
@@ -106,7 +106,7 @@ public class Iperf {
     @IperfOption(name = "flow-level", command = "-L", withValue = true)
     private String flowLabel;
     @IperfOption(name = "zerocopy", command = "-Z", withValue = false)
-    private String zeroCopy;
+    private boolean zeroCopy;
     @IperfOption(name = "omit", command = "-O", withValue = true)
     private String omit;
     @IperfOption(name = "title", command = "-T", withValue = true)
@@ -114,11 +114,11 @@ public class Iperf {
     @IperfOption(name = "extra-data", command = "--extra-data", withValue = true)
     private String extraData;
     @IperfOption(name = "get-server-output", command = "--get-server-output", withValue = false)
-    private String getServerOut;
+    private boolean getServerOut;
     @IperfOption(name = "udp-counters-64bit", command = "--udp-counters-64bit", withValue = false)
-    private String udpCounters64Bits;
+    private boolean udpCounters64Bits;
     @IperfOption(name = "repeating-payload", command = "--repeating-payload", withValue = false)
-    private String repeatingPayload;
+    private boolean repeatingPayload;
     @IperfOption(name = "username", command = "--username", withValue = true)
     private String username;
     @IperfOption(name = "rsa-public-key", command = "--rsa-public-key-path", withValue = true)

@@ -7,7 +7,7 @@ import java.util.HashMap;
 public interface IperfService {
 
 
-    String buildCommand(Iperf iperf, HashMap<String, String> options);
+    String buildCommand(Iperf iperf);
     String validateParams() throws Exception;
 
 
