@@ -39,7 +39,6 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
     }
 
     public boolean existsIperfBinary() {
-        Log.d(TAG, "ABI detected: " + ABI);
         Log.d(TAG, "Checking binary in path: " + this.iperfAbsolutePath);
         return Files.exists(Paths.get(this.iperfAbsolutePath));
 
@@ -76,7 +75,9 @@ public class InitialConfigurator extends AsyncTask<Context, Integer, Boolean> {
         this.manager = context.getAssets();
         this.iperfPath = context.getApplicationContext().getFilesDir().getAbsolutePath();
         Os.setenv("TEMP", this.iperfPath, true);
-        this.iperfAssetName = context.getResources().getString(R.string.asset_exec_name);
+        Log.d(TAG, "ABI detected: " + ABI);
+        String prefix = context.getResources().getString(R.string.asset_exec_prefix);
+        this.iperfAssetName = prefix.concat(ABI);
         this.iperfBinaryName = context.getResources().getString(R.string.binary_name);
         this.iperfAbsolutePath = iperfPath.concat(File.separator).concat(this.iperfBinaryName);
 

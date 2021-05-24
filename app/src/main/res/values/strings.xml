@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Iperf3Test</string>
     <string name="asset_exec_name">iperf3.9_arm64-v8a</string>
+    <string name="asset_exec_prefix">iperf3.9_</string>
     <string name="binary_name">iperf3</string>
     <string name="exec_target_path">iperf3</string>
     <string name="command_exec_permissions_prefix">chmod u+x </string>
